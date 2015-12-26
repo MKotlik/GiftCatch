@@ -1,6 +1,7 @@
 ArrayList<FallObject> fallObjList;
 PFont mainFont;
 int objCount;
+Bag mainBag;
 
 void setup() {
   size(640, 480);
@@ -12,11 +13,26 @@ void setup() {
   //fallObjList.add(new FallObject());
   //fallObjList.get(0).move();
   //fallObjList.get(0).display();
+  mainBag = new Bag();
 }
 
 void draw() {
   clear();
   background(255);
+  fallUpdate();
+  mainBag.move();
+  mainBag.display();
+  fill(0);
+  text(frameRate, 20, 20);
+  text(objCount, 20, 40);
+}
+
+void mousePressed() {
+  fallObjList.add(new FallObject());
+  objCount++;
+}
+
+void fallUpdate(){
   for (int i = 0; i < fallObjList.size(); i++) {
     fallObjList.get(i).move();
     if (fallObjList.get(i).getY() > height) {
@@ -27,11 +43,4 @@ void draw() {
       fallObjList.get(i).display();
     }
   }
-  text(frameRate, 20, 20);
-  text(objCount, 20, 40);
-}
-
-void mousePressed() {
-  fallObjList.add(new FallObject());
-  objCount++;
 }
