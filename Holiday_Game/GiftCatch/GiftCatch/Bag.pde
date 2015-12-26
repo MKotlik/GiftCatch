@@ -10,7 +10,7 @@ public class Bag {
     bagHeight = 10;
     xPos = width/2; //Start with x in middle of screen
     yPos = height * 9/10; //Start with y 9/10 of screen down
-    xSpeed = 2;
+    xSpeed = 5;
   }
 
   public int getX() {

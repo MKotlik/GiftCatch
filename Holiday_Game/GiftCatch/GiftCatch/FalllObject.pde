@@ -4,6 +4,7 @@ public class FallObject{
   private int objWidth;
   private int objHeight;
   private int ySpeed;
+  private int value;
   
   public FallObject(){
     objWidth = 20;
@@ -12,6 +13,7 @@ public class FallObject{
     xPos = (int)(random(objScreenRatio) * objWidth);
     yPos = 0;
     ySpeed = 1;
+    value = 1;
   }
   
   public int getX(){
@@ -34,8 +36,16 @@ public class FallObject{
     return ySpeed;
   }
   
+  public int getValue(){
+    return value;
+  }
+  
   public void move(){
     yPos += ySpeed;
+  }
+  
+  public boolean collide(int centerX, int centerY, int bagWidth, int bagHeight){
+    return (xPos >= (centerX - bagWidth/2) && xPos <= (centerX + bagWidth/2) && (yPos + objHeight) >= (centerY - bagHeight) && (yPos + objHeight) <= (centerY + bagHeight));
   }
   
   public void display(){
