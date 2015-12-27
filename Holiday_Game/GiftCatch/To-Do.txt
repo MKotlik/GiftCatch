@@ -1,5 +1,4 @@
 To-Do
-- Add timer
 - Add increasing difficulty with timer
 - Add negative-value objects
 - Add boost-objects

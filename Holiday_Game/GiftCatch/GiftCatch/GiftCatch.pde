@@ -20,7 +20,7 @@ void setup() {
   points = 0;
   timeInitial = currentTime();
   timeElapsed = 0;
-  timeRemaining = 5;
+  timeRemaining = 31;
 }
 
 void draw() {
@@ -45,7 +45,7 @@ void draw() {
     fallCreate();
     fallUpdate();
     fill(0);
-    textFont(smallFont,16);
+    textFont(smallFont, 16);
     text("FPS: " + frameRate, 20, 20);
     text("Objects: " + objCount, 20, 40);
     text("Points: " + points, 20, 60);
@@ -54,7 +54,7 @@ void draw() {
 }
 
 void mousePressed() { 
-  fallObjList.add(new FallObject());
+  fallObjList.add(new Gift());
   objCount++;
 }
 
@@ -64,7 +64,7 @@ int currentTime() {
 
 void fallCreate() {
   if (timeElapsed - timePrevious >= 1) {
-    fallObjList.add(new FallObject());
+    fallObjList.add(new Gift());
     objCount++;
   }
 }
