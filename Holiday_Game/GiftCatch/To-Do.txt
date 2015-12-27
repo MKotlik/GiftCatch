@@ -1,0 +1,11 @@
+To-Do
+- Fix FallObj spawning overlapping
+- Add timer
+- Add increasing difficulty with timer
+- Add negative-value objects
+- Add boost-objects
+- Add pause functionality
+- Add keyboard controls
+
+Fixed/Implemented
+- 12/26/2015 @9:26 -> Fix FallObj disappearing before fully hitting bag
