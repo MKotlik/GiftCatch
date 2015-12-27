@@ -71,9 +71,11 @@ public abstract class FallObject {
     return collisionMargin;
   }
 
-  public abstract void move();
+  public boolean collide(int centerX, int centerY, int bagWidth, int bagHeight) {
+    return (getX() >= (centerX - bagWidth/2) && getX() <= (centerX + bagWidth/2) && (getY() + getHeight()/2 - getMargin()) >= (centerY - bagHeight/2) && (getY() + getHeight()/2 - getMargin()) <= (centerY + bagHeight/2));
+  }
 
-  public abstract boolean collide(int centerX, int centerY, int bagWidth, int bagHeight);
+  public abstract void move();
 
   public abstract void display();
 }

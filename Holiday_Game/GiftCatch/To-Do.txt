@@ -1,11 +1,17 @@
 To-Do
-- Add increasing difficulty with timer
-- Add negative-value objects
 - Add boost-objects
 - Add pause functionality
+- Add start menu
 - Add keyboard controls
+- Improve difficulty functionality
+- Add config & save functionality
+- Add different game modes
+- Add graphics
+- Add sound
 
 Fixed/Implemented
 - 12/26/2015 @9:26 -> Fix FallObj disappearing before fully hitting bag
 - 12/26/2015 @9:44 -> Fix FallObj spawning overlapping
 - 12/26/2015 @10:20 -> Add timer, also added end game when no time remaining, and fixed fonts
+- 12/26/2015 @10:58 -> Implemented abstraction and gift objects
+- 12/26/2015 @11:08 -> Implemented coal (negative-value) objects & trialed increasing difficulty with time

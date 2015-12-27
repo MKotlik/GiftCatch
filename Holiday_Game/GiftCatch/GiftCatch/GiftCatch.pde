@@ -20,7 +20,7 @@ void setup() {
   points = 0;
   timeInitial = currentTime();
   timeElapsed = 0;
-  timeRemaining = 31;
+  timeRemaining = 30;
 }
 
 void draw() {
@@ -64,8 +64,18 @@ int currentTime() {
 
 void fallCreate() {
   if (timeElapsed - timePrevious >= 1) {
-    fallObjList.add(new Gift());
-    objCount++;
+    if (timeRemaining <= timeElapsed) {
+      if ((int)(random(3)) == 0) {
+        fallObjList.add(new Coal());
+        objCount++;
+      } else {
+        fallObjList.add(new Gift());
+        objCount++;
+      }
+    } else {
+      fallObjList.add(new Gift());
+      objCount++;
+    }
   }
 }
 

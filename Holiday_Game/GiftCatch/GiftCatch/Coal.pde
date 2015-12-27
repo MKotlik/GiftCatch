@@ -1,10 +1,10 @@
-public class Gift extends FallObject {
-  public Gift() {
-    super(20, 20, 1, 1);
+public class Coal extends FallObject {
+  public Coal() {
+    super(20, 20, 1, -1);
   }
 
-  public Gift(int ySpeed) {
-    super(20, 20, ySpeed, 1);
+  public Coal(int ySpeed) {
+    super(20, 20, ySpeed, -1);
   }
 
   public void move() {
@@ -12,7 +12,7 @@ public class Gift extends FallObject {
   }
 
   public void display() {
-    fill(255, 0, 0);
+    fill(0, 0, 255);
     rectMode(CENTER);
     rect(getX(), getY(), getWidth(), getHeight());
   }
