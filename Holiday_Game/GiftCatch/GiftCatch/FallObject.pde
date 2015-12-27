@@ -11,8 +11,9 @@ public class FallObject{
     objWidth = 20;
     objHeight = 20;
     float objScreenRatio = width/objWidth;
-    xPos = (int)(random(objScreenRatio) * objWidth);
+    xPos = (int)(random(objScreenRatio)) * objWidth + objWidth/2;
     yPos = 0;
+    System.out.println(xPos + "," + yPos);
     ySpeed = 1;
     value = 1;
     collisionMargin = 0;

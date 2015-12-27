@@ -1,5 +1,4 @@
 To-Do
-- Fix FallObj spawning overlapping
 - Add timer
 - Add increasing difficulty with timer
 - Add negative-value objects
@@ -9,3 +8,4 @@ To-Do
 
 Fixed/Implemented
 - 12/26/2015 @9:26 -> Fix FallObj disappearing before fully hitting bag
+- 12/26/2015 @9:44 -> Fix FallObj spawning overlapping
