@@ -1,11 +1,12 @@
 To-Do
-- Add boost-objects
 - Add pause functionality
 - Add start menu
 - Add keyboard controls
 - Improve difficulty functionality
 - Add config & save functionality
 - Add different game modes
+- Add different boosts
+- Add gifts, coal/negative-value objects of different values
 - Add graphics
 - Add status displaying, displaying lives, time, messages, and boosts!
 - Add sound

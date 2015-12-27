@@ -12,7 +12,7 @@ void setup() {
   background(255);
   rectMode(CENTER);
   xPos = width/2;
-  yPos = height * 4/5;
+  yPos = height * 9/10;
   bagWidth = 50;
   bagHeight = 10;
   rect(xPos, yPos, bagWidth, bagHeight);
