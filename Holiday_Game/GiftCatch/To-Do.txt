@@ -7,6 +7,7 @@ To-Do
 - Add config & save functionality
 - Add different game modes
 - Add graphics
+- Add status displaying, displaying lives, time, messages, and boosts!
 - Add sound
 
 Fixed/Implemented

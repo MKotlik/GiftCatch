@@ -6,6 +6,7 @@ public abstract class FallObject {
   private int ySpeed;
   private int value;
   private int collisionMargin;
+  private String boostType;
 
   /*
   public FallObject(){
@@ -20,7 +21,7 @@ public abstract class FallObject {
    }
    */
 
-  public FallObject(int objWidth, int objHeight, int ySpeed, int value) {
+  public FallObject(int objWidth, int objHeight, int ySpeed, int value, String boostType) {
     this.objWidth = objWidth;
     this.objHeight = objHeight;
     float objScreenRatio = width/objWidth;
@@ -29,6 +30,7 @@ public abstract class FallObject {
     this.ySpeed = ySpeed;
     this.value = value;
     collisionMargin = 0;
+    this.boostType = boostType;
   }
 
   public int getX() {
@@ -69,6 +71,10 @@ public abstract class FallObject {
 
   public int getMargin() {
     return collisionMargin;
+  }
+
+  public String getBoostType() {
+    return boostType;
   }
 
   public boolean collide(int centerX, int centerY, int bagWidth, int bagHeight) {

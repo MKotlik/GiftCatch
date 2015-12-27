@@ -1,10 +1,10 @@
 public class Coal extends FallObject {
   public Coal() {
-    super(20, 20, 1, -1);
+    super(20, 20, 1, -1, "none");
   }
 
   public Coal(int ySpeed) {
-    super(20, 20, ySpeed, -1);
+    super(20, 20, ySpeed, -1, "none");
   }
 
   public void move() {

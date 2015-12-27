@@ -40,7 +40,6 @@ void draw() {
   } else {
     clear();
     background(255);
-    mainBag.updateBoost(timeElapsed);
     mainBag.move();
     mainBag.display();
     fallCreate();
@@ -51,7 +50,6 @@ void draw() {
     text("Objects: " + objCount, 20, 40);
     text("Points: " + points, 20, 60);
     text("Time: " + timeRemaining, 20, 80);
-    text("Speed: " + mainBag.getXSpeed(), 20, 100); //Remove this later, and figure out another way of displaying boosts
   }
 }
 
@@ -63,12 +61,8 @@ void mousePressed() {
 void fallCreate() {
   if (timeElapsed - timePrevious >= 1) {
     if (timeRemaining <= timeElapsed) {
-      int randValue = (int)(random(3));
-      if (randValue == 0) {
+      if ((int)(random(3)) == 0) {
         fallObjList.add(new Coal());
-        objCount++;
-      } else if (randValue == 1){
-        fallObjList.add(new SpeedBoostx2());
         objCount++;
       } else {
         fallObjList.add(new Gift());
@@ -107,7 +101,7 @@ void fallUpdate() {
 void checkBoost(String boostType){
   //Implement main boosts (ex. time) here
   if (!(boostType.equals("none"))){
-    mainBag.acceptBoost(boostType,timeElapsed);
+    
   }
 }
 
