@@ -26,7 +26,7 @@ public abstract class FallObject {
     this.objHeight = objHeight;
     float objScreenRatio = width/objWidth;
     xPos = (int)(random(objScreenRatio)) * objWidth + objWidth/2;
-    yPos = 0; 
+    yPos = -objWidth/2; 
     this.ySpeed = ySpeed;
     this.value = value;
     collisionMargin = 0;

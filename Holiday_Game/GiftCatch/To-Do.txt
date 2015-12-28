@@ -2,6 +2,7 @@ To-Do
 - Add pause functionality
 - Add start menu
 - Add keyboard controls
+- Add before-start timer
 - Improve difficulty functionality
 - Add config & save functionality
 - Add different game modes
