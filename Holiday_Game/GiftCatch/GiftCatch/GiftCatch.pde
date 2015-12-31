@@ -1,6 +1,7 @@
 String mode; //MAIN_MENU, GAME, END, PAUSE
 nPanel mainMenu;
 nPanel pauseMenu;
+nPanel endMenu;
 ArrayList<FallObject> fallObjList;
 PFont smallFont;
 PFont mediumFont;
@@ -11,7 +12,7 @@ int points;
 int timeInitial;
 int timeElapsed; //Don't need both timeElapsed and timeRemaining. Choose timer-type before finishing.
 int timePrevious;
-int timeRemaining;
+int timeRemaining; //seconds
 int keyTimeout; //This is in draw cycles/frames
 
 void setup() {
@@ -78,6 +79,41 @@ void pauseMenuSetup() {
   pauseMenu.addElement(mainMenuButton);
 }
 
+void endMenuSetup(){
+  clear();
+  background(255);
+  endMenu = new nPanel();
+  //Title setup:
+  nLabel title = new nLabel("title", 180, 50, 280, 60);
+  title.setLabel("Gift Catch", 64, color(255, 0, 0), largeFont);
+  title.hideOutline();
+  endMenu.addElement(title);
+  //GameOver setup:
+  nLabel gameOver = new nLabel("gameOver", 180, 130, 280, 60);
+  gameOver.setLabel("Game Over", 42, color(255, 0, 0), mediumFont);
+  gameOver.hideOutline();
+  endMenu.addElement(gameOver);
+  //Score setup:
+  nLabel score = new nLabel("score", 180, 200, 280, 60);
+  score.setLabel("Score: " + points, 42, color(0), mediumFont);
+  score.hideOutline();
+  endMenu.addElement(score);
+  //Play again button setup:
+  nButton playButton = new nButton("play", 180, 280, 280, 60);
+  playButton.setLabel("Play Again", 42, color(0), mediumFont);
+  playButton.showLabel();
+  playButton.setKeyClickable(true);
+  playButton.setKeyBind('p');
+  endMenu.addElement(playButton);
+  //Main menu button setup:
+  nButton mainMenuButton = new nButton("mainMenu", 180, 360, 280, 60);
+  mainMenuButton.setLabel("Main Menu", 42, color(0), mediumFont);
+  mainMenuButton.showLabel();
+  mainMenuButton.setKeyClickable(true);
+  mainMenuButton.setKeyBind('m');
+  endMenu.addElement(mainMenuButton);
+}
+
 void draw() {
   if (mode.equals("MAIN_MENU")) {
     mainMenuDraw();
@@ -87,6 +123,9 @@ void draw() {
   }
   if (mode.equals("PAUSE")) {
     pauseMenuDraw();
+  }
+  if (mode.equals("END")){
+    endMenuDraw();
   }
 }
 
@@ -114,13 +153,8 @@ void gameDraw() {
     timeRemaining--;
   }
   if (timeRemaining <= 0) {
-    clear();
-    background(255);
-    fill(255, 0, 0);
-    textFont(largeFont, 64);
-    textAlign(CENTER);
-    text("GAME OVER", width/2, height/2);
-    noLoop();
+    mode = "END";
+    endMenuSetup();
   } else {
     clear();
     background(255);
@@ -154,6 +188,21 @@ void pauseMenuDraw() {
     mainMenuSetup();
   } else {
     pauseMenu.display();
+  }
+}
+
+void endMenuDraw(){
+  clear();
+  background(255);
+  endMenu.update();
+  if (endMenu.getAction().equals("play-MOUSE_CLICK") || endMenu.getAction().equals("play-KEY_CLICK")) {
+    mode = "GAME";
+    gameSetup();
+  } else if (endMenu.getAction().equals("mainMenu-MOUSE_CLICK") || keyTimeout <= 0 && endMenu.getAction().equals("mainMenu-KEY_CLICK")) {
+    mode = "MAIN_MENU";
+    mainMenuSetup();
+  } else {
+    endMenu.display();
   }
 }
 
