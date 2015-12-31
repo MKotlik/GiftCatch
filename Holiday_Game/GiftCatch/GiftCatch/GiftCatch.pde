@@ -2,12 +2,13 @@ String mode; //MAIN_MENU, GAME, END, PAUSE
 nPanel mainMenu;
 nPanel pauseMenu;
 nPanel endMenu;
-ArrayList<FallObject> fallObjList;
 PFont smallFont;
 PFont mediumFont;
 PFont largeFont;
-int objCount;
+ArrayList<FallObject> fallObjList;
 Bag mainBag;
+int fasterObjectSpeed;
+int objCount;
 int points;
 int timeInitial;
 int timeElapsed; //Don't need both timeElapsed and timeRemaining. Choose timer-type before finishing.
@@ -47,6 +48,7 @@ void gameSetup() {
   background(255);
   fallObjList  = new ArrayList<FallObject>();
   mainBag = new Bag();
+  fasterObjectSpeed = 2;
   objCount = 0;
   points = 0;
   timeInitial = currentTime();
@@ -211,13 +213,13 @@ void fallCreate() {
     if (timeRemaining <= timeElapsed) {
       int randValue = (int)(random(3));
       if (randValue == 0) {
-        fallObjList.add(new Coal());
+        fallObjList.add(new Coal(fasterObjectSpeed));
         objCount++;
       } else if (randValue == 1) {
-        fallObjList.add(new SpeedBoostx2());
+        fallObjList.add(new SpeedBoostx2(fasterObjectSpeed));
         objCount++;
       } else {
-        fallObjList.add(new Gift());
+        fallObjList.add(new Gift(fasterObjectSpeed));
         objCount++;
       }
     } else {
