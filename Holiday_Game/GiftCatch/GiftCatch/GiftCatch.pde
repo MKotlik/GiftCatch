@@ -5,6 +5,9 @@ nPanel endMenu;
 PFont smallFont;
 PFont mediumFont;
 PFont largeFont;
+PFont smallRoboto;
+PFont mediumRoboto;
+PFont largeRoboto;
 ArrayList<FallObject> fallObjList;
 Bag mainBag;
 int objCount;
@@ -13,6 +16,7 @@ int timeInitial;
 int timeElapsed; //Don't need both timeElapsed and timeRemaining. Choose timer-type before finishing.
 int timePrevious;
 int timeRemaining; //seconds
+int timeLimit;
 int keyTimeout; //This is in draw cycles/frames
 
 void setup() {
@@ -21,6 +25,9 @@ void setup() {
   smallFont  = loadFont("ArialMT-16.vlw");
   mediumFont = loadFont("ArialMT-32.vlw");
   largeFont = loadFont("ArialMT-64.vlw");
+  smallRoboto = createFont("Roboto-Regular.ttf", 16);
+  mediumRoboto = createFont("Roboto-Regular.ttf", 32);
+  largeRoboto = createFont("Roboto-Regular.ttf", 64);
   //Main menu setup
   mode = "MAIN_MENU";
   mainMenuSetup();
@@ -32,12 +39,13 @@ void mainMenuSetup() {
   mainMenu = new nPanel();
   //Title setup:
   nLabel title = new nLabel("title", 180, 50, 280, 60);
-  title.setLabel("Gift Catch", 64, color(255, 0, 0), largeFont);
+  title.setLabel("Gift Catch", 64, color(255, 0, 0), largeRoboto);
+  //title.setLabel("Gift Catch", 64, color(255, 0, 0), largeFont);
   title.hideOutline();
   mainMenu.addElement(title);
   //Play button setup:
   nButton playButton = new nButton("play", 180, 200, 280, 60);
-  playButton.setLabel("Play", 42, color(0), mediumFont);
+  playButton.setLabel("Play", 42, color(0), mediumRoboto);
   playButton.showLabel();
   mainMenu.addElement(playButton);
 }
@@ -51,7 +59,8 @@ void gameSetup() {
   points = 0;
   timeInitial = currentTime();
   timeElapsed = 0;
-  timeRemaining = 20;
+  timeLimit = 30;
+  timeRemaining = timeLimit;
 }
 
 void pauseMenuSetup() {
@@ -60,54 +69,54 @@ void pauseMenuSetup() {
   pauseMenu = new nPanel();
   //Title setup:
   nLabel title = new nLabel("title", 180, 50, 280, 60);
-  title.setLabel("Gift Catch", 64, color(255, 0, 0), largeFont);
+  title.setLabel("Gift Catch", 64, color(255, 0, 0), largeRoboto);
   title.hideOutline();
   pauseMenu.addElement(title);
   //Resume button setup:
   nButton resumeButton = new nButton("resume", 180, 210, 280, 60);
-  resumeButton.setLabel("Resume", 42, color(0), mediumFont);
+  resumeButton.setLabel("Resume", 42, color(0), mediumRoboto);
   resumeButton.showLabel();
   resumeButton.setKeyClickable(true);
   resumeButton.setKeyBind('p');
   pauseMenu.addElement(resumeButton);
   //Main menu button setup:
   nButton mainMenuButton = new nButton("mainMenu", 180, 330, 280, 60);
-  mainMenuButton.setLabel("Main Menu", 42, color(0), mediumFont);
+  mainMenuButton.setLabel("Main Menu", 42, color(0), mediumRoboto);
   mainMenuButton.showLabel();
   mainMenuButton.setKeyClickable(true);
   mainMenuButton.setKeyBind('m');
   pauseMenu.addElement(mainMenuButton);
 }
 
-void endMenuSetup(){
+void endMenuSetup() {
   clear();
   background(255);
   endMenu = new nPanel();
   //Title setup:
   nLabel title = new nLabel("title", 180, 50, 280, 60);
-  title.setLabel("Gift Catch", 64, color(255, 0, 0), largeFont);
+  title.setLabel("Gift Catch", 64, color(255, 0, 0), largeRoboto);
   title.hideOutline();
   endMenu.addElement(title);
   //GameOver setup:
   nLabel gameOver = new nLabel("gameOver", 180, 130, 280, 60);
-  gameOver.setLabel("Game Over", 42, color(255, 0, 0), mediumFont);
+  gameOver.setLabel("Game Over", 42, color(255, 0, 0), mediumRoboto);
   gameOver.hideOutline();
   endMenu.addElement(gameOver);
   //Score setup:
   nLabel score = new nLabel("score", 180, 200, 280, 60);
-  score.setLabel("Score: " + points, 42, color(0), mediumFont);
+  score.setLabel("Score: " + points, 42, color(0), mediumRoboto);
   score.hideOutline();
   endMenu.addElement(score);
   //Play again button setup:
   nButton playButton = new nButton("play", 180, 280, 280, 60);
-  playButton.setLabel("Play Again", 42, color(0), mediumFont);
+  playButton.setLabel("Play Again", 42, color(0), mediumRoboto);
   playButton.showLabel();
   playButton.setKeyClickable(true);
   playButton.setKeyBind('p');
   endMenu.addElement(playButton);
   //Main menu button setup:
   nButton mainMenuButton = new nButton("mainMenu", 180, 360, 280, 60);
-  mainMenuButton.setLabel("Main Menu", 42, color(0), mediumFont);
+  mainMenuButton.setLabel("Main Menu", 42, color(0), mediumRoboto);
   mainMenuButton.showLabel();
   mainMenuButton.setKeyClickable(true);
   mainMenuButton.setKeyBind('m');
@@ -124,7 +133,7 @@ void draw() {
   if (mode.equals("PAUSE")) {
     pauseMenuDraw();
   }
-  if (mode.equals("END")){
+  if (mode.equals("END")) {
     endMenuDraw();
   }
 }
@@ -163,21 +172,32 @@ void gameDraw() {
     mainBag.display();
     fallCreate();
     fallUpdate();
-    fill(0);
     textAlign(LEFT);
     textFont(smallFont, 16);
-    text("FPS: " + frameRate, 20, 20);
-    text("Objects: " + objCount, 20, 40);
+    /*
+    fill(0);
+     text("FPS: " + frameRate, 20, 20);
+     text("Objects: " + objCount, 20, 40);
+     text("Points: " + points, 20, 60);
+     text("Time: " + timeRemaining, 20, 80);
+     text("Speed: " + mainBag.getXSpeed(), 20, 100); //Remove this later, and figure out another way of displaying boosts
+     */
+    fill(3, 128, 8);
+    //fill(0, 255, 0);
     text("Points: " + points, 20, 60);
+    if (timeRemaining <= timeLimit / 3) {
+      fill(255, 0, 0);
+    } else {
+      fill(0, 0, 255);
+    }
     text("Time: " + timeRemaining, 20, 80);
-    text("Speed: " + mainBag.getXSpeed(), 20, 100); //Remove this later, and figure out another way of displaying boosts
   }
 }
 
 void pauseMenuDraw() {
   clear();
   background(255);
-  if (keyTimeout > 0){
+  if (keyTimeout > 0) {
     keyTimeout--;
   }
   pauseMenu.update();
@@ -191,7 +211,7 @@ void pauseMenuDraw() {
   }
 }
 
-void endMenuDraw(){
+void endMenuDraw() {
   clear();
   background(255);
   endMenu.update();
@@ -255,7 +275,7 @@ void fallUpdate() {
 
 void checkBoost(String boostType) {
   //Implement main boosts (ex. time) here
-  if (!(boostType.equals("none")) && ! mainBag.getBoost().equals(boostType)) {
+  if (!(boostType.equals("none")) && mainBag.getBoost().equals("no")) {
     mainBag.acceptBoost(boostType, timeElapsed);
   }
 }

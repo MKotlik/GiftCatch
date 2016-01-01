@@ -8,10 +8,11 @@ public class Bag {
   private int originalSpeed;
   private String boosted;
   private int initializedBoostTime;
+  private color bagColor;
 
   public Bag() {
-    bagWidth = 80;
-    bagHeight = 10;
+    bagWidth = 100;
+    bagHeight = 50;
     xPos = width/2; //Start with x in middle of screen
     yPos = height * 9/10; //Start with y 9/10 of screen down
     xSpeed = 5;
@@ -19,6 +20,7 @@ public class Bag {
     originalSpeed = xSpeed;
     boosted = "no";
     initializedBoostTime = 0;
+    bagColor = color(237, 0, 55);
   }
 
   public int getX() {
@@ -72,7 +74,7 @@ public class Bag {
 
 
   public void display() {
-    fill(0);
+    fill(bagColor);
     rectMode(CENTER);
     rect(xPos, yPos, bagWidth, bagHeight);
   }

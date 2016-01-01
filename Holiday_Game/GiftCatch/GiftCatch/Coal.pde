@@ -12,7 +12,7 @@ public class Coal extends FallObject {
   }
 
   public void display() {
-    fill(0, 0, 255);
+    fill(0);
     rectMode(CENTER);
     rect(getX(), getY(), getWidth(), getHeight());
   }
