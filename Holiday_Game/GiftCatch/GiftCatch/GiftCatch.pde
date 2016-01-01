@@ -209,12 +209,15 @@ void endMenuDraw(){
 void fallCreate() {
   if (timeElapsed - timePrevious >= 1) {
     if (timeRemaining <= timeElapsed) {
-      int randValue = (int)(random(3));
+      int randValue = (int)(random(4));
       if (randValue == 0) {
         fallObjList.add(new Coal((int)(random(3)) + 2));
         objCount++;
       } else if (randValue == 1) {
         fallObjList.add(new SpeedBoostx2((int)(random(3)) + 2));
+        objCount++;
+      } else if (randValue == 2) {
+        fallObjList.add(new SizeBoostx2((int)(random(3)) + 2));
         objCount++;
       } else {
         fallObjList.add(new Gift((int)(random(3)) + 2));

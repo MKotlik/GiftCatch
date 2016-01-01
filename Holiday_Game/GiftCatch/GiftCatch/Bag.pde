@@ -86,6 +86,10 @@ public class Bag {
       boosted = boostType;
       initializedBoostTime = initialTime;
       xSpeed = xSpeed * 2;
+    } else if (boostType.equals("size_x2")) {
+      boosted = boostType;
+      initializedBoostTime = initialTime;
+      bagWidth = bagWidth * 2;
     }
   }
 
@@ -93,6 +97,12 @@ public class Bag {
     if (boosted.equals("speed_x2")) {
       if (currentTime - initializedBoostTime >= 5) {
         xSpeed = originalSpeed;
+        initializedBoostTime = 0;
+        boosted = "no";
+      }
+    } else if (boosted.equals("size_x2")) {
+      if (currentTime - initializedBoostTime >= 5) {
+        bagWidth = originalWidth;
         initializedBoostTime = 0;
         boosted = "no";
       }
