@@ -7,7 +7,6 @@ PFont mediumFont;
 PFont largeFont;
 ArrayList<FallObject> fallObjList;
 Bag mainBag;
-int fasterObjectSpeed;
 int objCount;
 int points;
 int timeInitial;
@@ -48,12 +47,11 @@ void gameSetup() {
   background(255);
   fallObjList  = new ArrayList<FallObject>();
   mainBag = new Bag();
-  fasterObjectSpeed = 2;
   objCount = 0;
   points = 0;
   timeInitial = currentTime();
   timeElapsed = 0;
-  timeRemaining = 30;
+  timeRemaining = 20;
 }
 
 void pauseMenuSetup() {
@@ -213,17 +211,17 @@ void fallCreate() {
     if (timeRemaining <= timeElapsed) {
       int randValue = (int)(random(3));
       if (randValue == 0) {
-        fallObjList.add(new Coal(fasterObjectSpeed));
+        fallObjList.add(new Coal((int)(random(3)) + 2));
         objCount++;
       } else if (randValue == 1) {
-        fallObjList.add(new SpeedBoostx2(fasterObjectSpeed));
+        fallObjList.add(new SpeedBoostx2((int)(random(3)) + 2));
         objCount++;
       } else {
-        fallObjList.add(new Gift(fasterObjectSpeed));
+        fallObjList.add(new Gift((int)(random(3)) + 2));
         objCount++;
       }
     } else {
-      fallObjList.add(new Gift());
+      fallObjList.add(new Gift((int)(random(3)) + 1));
       objCount++;
     }
   }
@@ -254,7 +252,7 @@ void fallUpdate() {
 
 void checkBoost(String boostType) {
   //Implement main boosts (ex. time) here
-  if (!(boostType.equals("none"))) {
+  if (!(boostType.equals("none")) && ! mainBag.getBoost().equals(boostType)) {
     mainBag.acceptBoost(boostType, timeElapsed);
   }
 }

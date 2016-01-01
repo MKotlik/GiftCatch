@@ -76,6 +76,10 @@ public class Bag {
     rectMode(CENTER);
     rect(xPos, yPos, bagWidth, bagHeight);
   }
+  
+  public String getBoost(){
+    return boosted;
+  }
 
   public void acceptBoost(String boostType, int initialTime) {
     if (boostType.equals("speed_x2")) {
